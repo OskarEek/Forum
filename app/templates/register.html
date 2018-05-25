@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field, render_checkbox %}
+{% block container %}
+
+
+<form method=post>
+  {{ form.csrf_token }}
+  <dl>
+    {{ render_field(form.username, class="u-full-width", placeholder="Username") }}
+    {{ render_field(form.password, class="u-full-width", placeholder="Password") }}
+    {{ render_field(form.confirm, class="u-full-width", placeholder="Repeat Password") }}
+    {{ render_checkbox(form.accept_tos, placeholder="Titel") }}
+  </dl>
+  <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

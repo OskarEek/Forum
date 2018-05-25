@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block container %}
+<form method=post>
+    {{ form.csrf_token }}
+
+    {{ render_field(form.username, class="u-full-width", placeholder="Username") }}
+    {{ render_field(form.password, class="u-full-width", placeholder="Password") }}
+
+  <p>{{ form.submit() }}</p>
+</form>
+
+
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}

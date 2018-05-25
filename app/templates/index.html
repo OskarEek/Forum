@@ -1,34 +1,36 @@
 {% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
 {% block container %}
-<h1>Välkommen</h1>
-<p>Detta är en liten enkel todo-applikation.</p>
+<h1>Det här är ett forum, välkommen {{current_user.username}}</h1>
+
 
 <form method="POST" action="/">
   {{ form.csrf_token }}
 
-  {{ form.title.label }}
-  {{ form.title(class="u-full-width", placeholder="Att göra...") }}
+  {{ render_field(form.title, class="u-full-width", placeholder="Titel") }}
 
-  {{ form.description.label }}
-  {{ form.description(class="u-full-width", placeholder="Beskrivning...") }}
+  {{ render_field(form.description, class="u-full-width", placeholder="Diskutionsämne, fråga...") }}
 
-    {{ form.submit(class="button-primary") }}
-</form>
+  {{ form.submit(class="button-primary") }}
+
 
 <ul>
   {% for item in items %}
     <li id="item-{{item.id}}">
-      <div class="package">
-        <div class="checkbox">
-        <label>
-            <input id="checkbox-{{item.id}}" type="checkbox" name="check" data-item-id="{{item.id}}" {{ 'checked' if item.done }}> Klar?
-        </label>
+      {% if current_user.username == item.author.username %}
+        <div class="package">
+          <div class="checkbox">
+            <label>
+              <input id="checkbox-{{item.id}}" type="checkbox" name="check" data-item-id="{{item.id}}" {{ 'checked' if item.done }}> Klar?
+            </label>
+          </div>
         </div>
+      {% endif %}
 
-        <h2>{{item.title}}</h2>
-        <h4> {{item.description}} </h4>
+        <h2>{{item.title}} - {{item.author.username}}</h2>
+        <h4>{{item.description}}</h4>
 
-      </div>
+
     </li>
   {% endfor %}
 </ul>

@@ -3,7 +3,7 @@
 <head>
   {%- block head %}
   <meta charset="utf-8">
-  <title>{% block title %}TODO{% endblock %}</title>
+  <title>{% block title %}Forum{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
@@ -12,6 +12,9 @@
   {% endblock -%}
 </head>
 <body>
+<div class="menu">
+  <a href="{{ url_for('main.logout')}}">Logout</a>
+</div>
 <div class="container">
 {% block container %}{% endblock %}
 {% block script %}{% endblock %}
